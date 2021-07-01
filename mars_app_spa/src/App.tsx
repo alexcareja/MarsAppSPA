@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { IntroTemplate } from "./introTemplate";
 import { ClicksCounter } from "./clicksCounter";
+import { Component1 } from "./complexComponentsClicksCounter";
 
 const nasaString = "NASA"
 const par1 = "The National Aeronautics and Space Administration (NASA) is an independent agency of the U.S. federal government responsible for the civilian space program, as well as aeronautics and space research."
@@ -15,7 +16,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <IntroTemplate title = {nasaString} paragraph1 = {par1} paragraph2 = {par2} imageUrl = {nasaLogoUrl}/>
-        <ClicksCounter/>
+        <Component1/>
       </header>
     </div>
   );
