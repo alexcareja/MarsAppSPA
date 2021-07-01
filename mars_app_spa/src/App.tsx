@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { NasaInformations } from "./nasaIntro";
 import { IntroTemplate } from "./introTemplate";
-import { ClicksCounter } from "./clicksCounter";
 import { Component1 } from "./complexComponentsClicksCounter";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const nasaString = "NASA"
 const par1 = "The National Aeronautics and Space Administration (NASA) is an independent agency of the U.S. federal government responsible for the civilian space program, as well as aeronautics and space research."
@@ -13,11 +19,21 @@ const nasaLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/N
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <IntroTemplate title = {nasaString} paragraph1 = {par1} paragraph2 = {par2} imageUrl = {nasaLogoUrl}/>
-        <Component1/>
-      </header>
+      <Router>
+          {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/clicker">
+              <Component1 />
+            </Route>
+            <Route path="/nasa">
+              <NasaInformations />
+            </Route>
+            <Route path="/">
+              <img src={logo} className="App-logo" alt="logo" />
+            </Route>
+          </Switch>
+      </Router>
     </div>
   );
 }
