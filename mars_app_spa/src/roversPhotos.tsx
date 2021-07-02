@@ -3,21 +3,32 @@ import Select from "react-select"
 import { getRoversNames } from "./getRovers"
 import { getRoversCameras } from "./getRoversCameras";
 
+function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+}
+
 const RoversSelect: React.FC = () => {
     const [roverName, setRoverName] = React.useState("Select a rover");
     const [cameraName, setCameraName] = React.useState("Select a camera");
+    const [buttonValidity, setButtonValidity] = React.useState(0);
 
     const handleRoverChange = (selectedRoverName: {value: string; label:string;}| null) => {
         if (selectedRoverName) {
             setRoverName(selectedRoverName.value);
+            setButtonValidity(0);
         }
     };
     
     const handleCameraChange = (selectedCameraName: {value: string; label:string;}| null) => {
         if (selectedCameraName) {
             setCameraName(selectedCameraName.value);
+            setButtonValidity(1);
         }
     };
+
+    const retrieveImages = () => {
+
+    }
 
     const roversNames: {value:string, label:string}[] = [];
     const camerasNames: {value:string, label:string}[] = [];
@@ -33,7 +44,7 @@ const RoversSelect: React.FC = () => {
     });
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <p>Select a rover from the given list</p>
             <Select
                 placeholder={roverName}
@@ -43,6 +54,7 @@ const RoversSelect: React.FC = () => {
                 placeholder={cameraName}
                 onChange={handleCameraChange}
                 options={camerasNames} />
+            <button disabled={!buttonValidity} onClick={retrieveImages}>Submit</button>
         </form>
     );
 }
