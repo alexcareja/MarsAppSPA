@@ -10,6 +10,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { RoversSelect } from "./roversPhotos";
 
 const nasaString = "NASA"
 const par1 = "The National Aeronautics and Space Administration (NASA) is an independent agency of the U.S. federal government responsible for the civilian space program, as well as aeronautics and space research."
@@ -21,11 +22,14 @@ function App() {
     <div className="App">
       <Router>
           <Switch>
-            <Route path="/clicker">
-              <Component1 />
+            <Route path="/nasa/images">
+              <RoversSelect />
             </Route>
             <Route path="/nasa">
               <NasaInformations />
+            </Route>
+            <Route path="/clicker">
+              <Component1 />
             </Route>
             <Route path="/">
               <img src={logo} className="App-logo" alt="logo" />
