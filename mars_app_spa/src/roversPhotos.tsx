@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import Select from "react-select"
+import { getRoversPhotos } from "./getImages";
 import { getRoversNames } from "./getRovers"
 import { getRoversCameras } from "./getRoversCameras";
 
@@ -11,6 +12,7 @@ const RoversSelect: React.FC = () => {
     const [roverName, setRoverName] = React.useState("Select a rover");
     const [cameraName, setCameraName] = React.useState("Select a camera");
     const [buttonValidity, setButtonValidity] = React.useState(0);
+    const [imagesHTMLString, setImagesHTMLString] = React.useState("");
 
     const handleRoverChange = (selectedRoverName: {value: string; label:string;}| null) => {
         if (selectedRoverName) {
@@ -27,7 +29,9 @@ const RoversSelect: React.FC = () => {
     };
 
     const retrieveImages = () => {
-
+        getRoversPhotos(roverName, cameraName).then((images) => {
+            setImagesHTMLString(images);
+        });
     }
 
     const roversNames: {value:string, label:string}[] = [];
@@ -55,6 +59,7 @@ const RoversSelect: React.FC = () => {
                 onChange={handleCameraChange}
                 options={camerasNames} />
             <button disabled={!buttonValidity} onClick={retrieveImages}>Submit</button>
+            <div dangerouslySetInnerHTML={{__html: imagesHTMLString}} />
         </form>
     );
 }

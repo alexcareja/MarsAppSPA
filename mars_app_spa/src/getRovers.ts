@@ -14,5 +14,5 @@ export function getRoversNames(): Promise<string[]> {
         .catch(function (error: string) {
             console.log(error);
             throw error;
-        })
+        });
 }
